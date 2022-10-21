@@ -1,0 +1,81 @@
+
+1)
+python manage.py shell
+from django.contrib.auth.models import User
+from NewsApp.models import *
+from django.db.models import Sum
+User.objects.create_user('Яков Борисович Тарусский')
+User.objects.create_user('Берегиня Ивановна Криворожская')
+
+2)
+
+user1 = User.objects.get(pk=1)
+author1 = Author.objects.create(user = user1)
+user2 = User.objects.get(pk=2)
+author2 = Author.objects.create(user = user2)
+
+3)
+category1 = Category.objects.create(name_category = 'мой хозяин идиот')
+category2 = Category.objects.create(name_category = 'что нового на кухне')
+category3 = Category.objects.create(name_category = 'кто скинул шерсти больше')
+category4 = Category.objects.create(name_category = 'находка дня')
+
+
+4)
+article1 = Post.objects.create(author_post = author1, type_post = Post.article, title_post = 'тапки и стресс', text_post = 'тапки в зубах отлично помогают справиться со стрессом')
+article2 = Post.objects.create(author_post = author2, type_post = Post.article, title_post = 'белые сугробы', text_post = 'если хозяин не подметает пару дней, в углу будут сугробы из моей белой шёрстки')
+news1 = Post.objects.create(author_post = author1, type_post = Post.news, title_post = 'срочная новость!', text_post = 'я первый нашёл гнилой пирожок!')
+
+5)
+c1 = Category.objects.all()[0]
+c2 = Category.objects.all()[1]
+c3 = Category.objects.all()[2]
+c4 = Category.objects.all()[3]
+article1.categories_post.add(c4)
+article2.categories_post.add(c1, c3)
+news1.categories_post.add(c1, c4)
+
+6)
+com1 = Comment.objects.create(post_comment = article1, user_comment = user2, text_comment = 'да ладно! нужно будет попробовать! мне, кстати, помогает пуллер')
+
+com2 = Comment.objects.create(post_comment = article2, user_comment = user1, text_comment = 'а у меня больше черной шерсти, но белая тоже есть))')
+
+
+com3 = Comment.objects.create(post_comment = news1, user_comment = user2, text_comment = 'вот это тебе повезло! я сегодня ничего не нашел(')
+
+com4 = Comment.objects.create(post_comment = news1, user_comment = user1, text_comment = 'это всё потому что ты был слишком увлечён пуллером, следующий раз будь внимательнее')
+
+
+7)
+article1.like()
+article1.like()
+article1.like()
+article1.dislike()
+article2.like()
+article2.like()
+article2.dislike()
+news1.like()
+news1.like()
+com1.like()
+com1.like()
+com1.dislike()
+com2.like()
+com3.like()
+com4.like()
+
+8)
+a1 = author1.update_rating()
+a2 = author2.update_rating()
+
+9)
+Author.objects.all().order_by('-auth_rating').values('user__username', 'auth_rating').first()
+
+10)
+best_post = Post.objects.all().order_by('-rating_post').first()
+best_post_data = Post.objects.all().order_by('-rating_post').values('date_time_post', 'author_post__user__username', 'rating_post', 'title_post').first()
+best_post_preview = Post.objects.all().order_by('-rating_post').first().preview()
+best_post_preview
+
+11)
+comments = Comment.objects.filter(post_comment = best_post).values('data_time_comment', 'user_comment', 'rating_comment', 'text_comment')
+comments

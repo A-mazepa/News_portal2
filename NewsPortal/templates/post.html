@@ -1,0 +1,28 @@
+
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Post
+{% endblock title %}
+
+
+{% block content %}
+<h1>Информация о публикации</h1>
+<table>
+    <tr>
+        <td>Заголовок</td>
+        <td>Дата и время</td>
+        <td>Текст</td>
+    </tr>
+
+
+    <tr>
+
+        <td>{{ post.title_post }}</td>
+        <td>{{ post.date_time_post }}</td>
+        <td>{{ post.text_post }}</td>
+    </tr>
+
+
+</table>
+{% endblock content %}
