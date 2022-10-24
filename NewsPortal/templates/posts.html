@@ -13,7 +13,7 @@ Posts
 <table>
     <tr>
         <td>Заголовок</td>
-        <td>Дата и время</td>
+        <td>Дата</td>
         <td>Текст</td>
     </tr>
 
@@ -21,7 +21,7 @@ Posts
     <tr>
 
         <td>{{ post.title_post }}</td>
-        <td>{{ post.date_time_post }}</td>
+        <td>{{ post.date_time_post|date:'d M Y' }}</td>
         <td>{{ post.text_post|truncatewords:20 }}</td>
     </tr>
     {% endfor %}
