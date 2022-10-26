@@ -18,9 +18,9 @@ Post
 
     <tr>
 
-        <td>{{ post.title_post }}</td>
+        <td>{{ post.title_post|censor }}</td>
         <td>{{ post.date_time_post|date:'d M Y'  }}</td>
-        <td>{{ post.text_post }}</td>
+        <td>{{ post.text_post|censor }}</td>
     </tr>
 
 
