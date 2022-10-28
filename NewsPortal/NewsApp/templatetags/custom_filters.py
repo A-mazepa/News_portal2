@@ -13,3 +13,11 @@ def currency(value):
     """
     # Возвращаемое функцией значение подставится в шаблон.
     return f'{value} Р'
+
+words = ['редиска', 'какашка']
+
+@register.filter()
+def censor(value):
+    for word in words:
+        value = value.replace(word, '***')
+    return value
