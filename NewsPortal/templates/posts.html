@@ -4,7 +4,7 @@
 {% load custom_tags %}
 
 {% block title %}
-Products
+Posts
 {% endblock title %}
 
 {% block content %}
@@ -14,7 +14,7 @@ Products
     {{ filterset.form.as_p }}
     <input type="submit" value="Найти" />
 </form>
-
+Количество публикаций: {{  posts|length}}
 <hr>
 {% if posts %}
 <table>
