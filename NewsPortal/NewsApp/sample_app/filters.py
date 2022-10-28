@@ -8,8 +8,4 @@ class PostFilter(FilterSet):
 
             'title_post': ['icontains'],
             'author_post': ['icontains'],
-            'date_time_post': [
-
-                'gt',
-            ],
         }
