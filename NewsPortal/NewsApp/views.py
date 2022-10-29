@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .models import Post
 from .forms import PostForm
@@ -63,4 +63,16 @@ class NewsUpdate(UpdateView):
     form_class = PostForm
     model = Post
     template_name = 'post_edit.html'
+
+
+class ArticleDelete(DeleteView):
+    model = Post
+    template_name = 'post_delete.html'
+    success_url = reverse_lazy('post_list')
+
+
+class NewsDelete(DeleteView):
+    model = Post
+    template_name = 'post_delete.html'
+    success_url = reverse_lazy('post_list')
 
