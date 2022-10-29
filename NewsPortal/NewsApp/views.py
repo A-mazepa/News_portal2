@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from .models import Post
 from .forms import PostForm
@@ -28,6 +28,7 @@ class PostDetail(DetailView):
     template_name = 'post.html'
     context_object_name = 'post'
 
+
 class ArticleCreate(CreateView):
 
     form_class = PostForm
@@ -39,6 +40,7 @@ class ArticleCreate(CreateView):
         post.type_post = 'article'
         return super().form_valid(form)
 
+
 class NewsCreate(CreateView):
 
     form_class = PostForm
@@ -49,3 +51,16 @@ class NewsCreate(CreateView):
         post = form.save(commit=False)
         post.type_post = 'news'
         return super().form_valid(form)
+
+
+class ArticleUpdate(UpdateView):
+    form_class = PostForm
+    model = Post
+    template_name = 'post_edit.html'
+
+
+class NewsUpdate(UpdateView):
+    form_class = PostForm
+    model = Post
+    template_name = 'post_edit.html'
+
