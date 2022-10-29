@@ -28,8 +28,24 @@ class PostDetail(DetailView):
     template_name = 'post.html'
     context_object_name = 'post'
 
-class PostCreate(CreateView):
+class ArticleCreate(CreateView):
 
     form_class = PostForm
     model = Post
     template_name = 'post_edit.html'
+
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        post.type_post = 'article'
+        return super().form_valid(form)
+
+class NewsCreate(CreateView):
+
+    form_class = PostForm
+    model = Post
+    template_name = 'post_edit.html'
+
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        post.type_post = 'news'
+        return super().form_valid(form)
