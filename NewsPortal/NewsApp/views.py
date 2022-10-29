@@ -1,5 +1,8 @@
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView
+
 from .models import Post
+from .forms import PostForm
 from .filters import PostFilter
 
 class PostsList(ListView):
@@ -25,3 +28,8 @@ class PostDetail(DetailView):
     template_name = 'post.html'
     context_object_name = 'post'
 
+class PostCreate(CreateView):
+
+    form_class = PostForm
+    model = Post
+    template_name = 'post_edit.html'
