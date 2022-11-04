@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 
 LOGIN_URL = "/accounts/login"
-LOGIN_REDIRECT_URL = "/posts"
+LOGIN_REDIRECT_URL = "/"
 
 SITE_ID = 1
 
