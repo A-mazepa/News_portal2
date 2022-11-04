@@ -6,7 +6,7 @@ from .models import Post
 from .forms import PostForm
 from .filters import PostFilter
 
-class PostsList(ListView):
+class PostsList(LoginRequiredMixin, ListView):
     model = Post
     ordering = 'title_post'
     template_name = 'posts.html'
@@ -24,13 +24,13 @@ class PostsList(ListView):
         return context
 
 
-class PostDetail(DetailView):
+class PostDetail(LoginRequiredMixin, DetailView):
     model = Post
     template_name = 'post.html'
     context_object_name = 'post'
 
 
-class ArticleCreate(CreateView):
+class ArticleCreate(LoginRequiredMixin, CreateView):
 
     form_class = PostForm
     model = Post
@@ -42,7 +42,7 @@ class ArticleCreate(CreateView):
         return super().form_valid(form)
 
 
-class NewsCreate(CreateView):
+class NewsCreate(LoginRequiredMixin, CreateView):
 
     form_class = PostForm
     model = Post
@@ -66,13 +66,13 @@ class NewsUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'post_edit.html'
 
 
-class ArticleDelete(DeleteView):
+class ArticleDelete(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('post_list')
 
 
-class NewsDelete(DeleteView):
+class NewsDelete(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('post_list')
